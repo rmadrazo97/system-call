@@ -40,9 +40,9 @@ sudo apt-get install libelf-dev
 ```
 > nano printint.c
 ```
-### 8. Write function:
+### 8. Write function inside printintc:
 ```
-> SYSCALL_DEFINE1(my_printint_1, int, a)  
+SYSCALL_DEFINE1(my_printint_1, int, a)  
 {  
     printk("My number to print is : %d\n", a);  
     return 0;  
@@ -59,7 +59,7 @@ sudo apt-get install libelf-dev
 ### 11. Return to previous directory and open Makefile
 ```
 > cd ../  
-> nano Makefile
+nano Makefile
 ```
 ### 12. add printint/ to the kernel’s Makefile.
 #### search for core-y using crtl^ w
@@ -72,7 +72,7 @@ sudo apt-get install libelf-dev
 #### move to syscalls directory and open syscall_64.tbl: 
 ```
 > cd arch/x86/entry/syscalls/  
-> nano syscall_64.tbl  
+nano syscall_64.tbl  
 ```
 #### add a new line at the end:
 ```
@@ -94,17 +94,28 @@ nano syscalls.h
 > sudo apt-get update  
 sudo apt-get upgrade  
 ```
-### 16. from your linux-4.17.4/ directory run:
+### 16. from your linux-4.17.4/ directory run: (you can run:  "make -jn" in order to use n (remember to replace a number instead of n) cores of your cpu to compile faster) 
 ```
 > make menuconfig
 make
 ```
-### 17.wait ... ... ... ... ...
+### 17. Wait for the kernel to compile
 ```
-> ...  
-> ...  
+...  wait
+...  keep waiting
 ```
 ### 18. update Kernel
 ```
 > sudo make modules_install install  
 ```
+### 19. Reboot system to update changes in kernel. 
+```
+> shutdown -r now
+```
+### 20. Verify the version of the kernel
+```
+uname -r
+```
+#### This command should display the version of the kernel that we just updated and modified. (4.17.4)
+
+## Why does this doesn't work on Docker
