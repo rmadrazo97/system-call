@@ -40,7 +40,10 @@ sudo apt-get install libelf-dev
 ```
 > nano printint.c
 ```
-### 8. Write function inside printintc:
+### 8. Write function inside printint.c:
+#### Understanding the function:
+>
+SYSCALL_DEFINE1 is a macro for functions with 1 parameter. The number represents the quantity of paremeters that it accepts.
 ```
 SYSCALL_DEFINE1(my_printint_1, int, a)  
 {  
@@ -66,7 +69,7 @@ nano Makefile
 #### on the second match add the path to the end of the line.
 > add " printint/" the end of this line: core-y += kernel/ mm/ fs/ ipc/ security/ crypto/ block/ 
 ```
-> core-y += kernel/ mm/ fs/ ipc/ security/ crypto/ block/ printint/"
+> core-y += kernel/ mm/ fs/ ipc/ security/ crypto/ block/ printint/
 ```
 ### 13. Add the system call to the system call table:
 #### move to syscalls directory and open syscall_64.tbl: 
@@ -119,3 +122,4 @@ uname -r
 #### This command should display the version of the kernel that we just updated and modified. (4.17.4)
 
 ## Why does this doesn't work on Docker
+This excercise will not function in a Docker container since docker containers work on top of the host's kernel. So after we reboot the container, the kernel versions remains unchanged. Since docker works on a closed environment (sandbox) it is unable to make changes to the kernel
