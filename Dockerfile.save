@@ -1,0 +1,14 @@
+#Get ubuntu v16.04
+FROM ubuntu:16.04
+
+# First update and upgrade
+RUN apt-get update
+RUN apt-get upgrade
+
+# get necessary tools
+RUN apt-get install -y curl
+RUN 
+RUN
+
+apt-get install xz-utils
+
